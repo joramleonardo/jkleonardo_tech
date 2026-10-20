@@ -242,7 +242,7 @@ export default function PortfolioLayout({ children }: PortfolioLayoutProps) {
                                     <span>{item.name}</span>
                                     {item.badge && (
                                         <span className="px-2 py-0.5 rounded-full text-xs font-mono bg-violet-500/20 text-violet-200">
-                                            {item.badge} Live
+                                            {item.badge} Projects
                                         </span>
                                     )}
                                 </Link>
@@ -360,23 +360,33 @@ export default function PortfolioLayout({ children }: PortfolioLayoutProps) {
                             </ul>
                         </div>
 
-                        {/* Column 3: Live Projects */}
+                        {/* Column 3: Featured Projects */}
                         <div className="md:col-span-3 space-y-3">
                             <div className="text-xs font-mono uppercase tracking-wider text-violet-300">
-                                My Live Websites
+                                Featured Projects
                             </div>
                             <ul className="space-y-2.5 text-sm">
                                 {PROJECTS.map((proj) => (
                                     <li key={proj.id}>
-                                        <a
-                                            href={proj.liveUrl}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="text-slate-400 hover:text-violet-300 transition flex items-center justify-between gap-2"
-                                        >
-                                            <span className="truncate">{proj.title}</span>
-                                            <span className="text-[11px] font-mono text-violet-400 shrink-0">↗</span>
-                                        </a>
+                                        {proj.liveUrl ? (
+                                            <a
+                                                href={proj.liveUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-slate-400 hover:text-violet-300 transition flex items-center justify-between gap-2"
+                                            >
+                                                <span className="truncate">{proj.title}</span>
+                                                <span className="text-[11px] font-mono text-violet-400 shrink-0">↗</span>
+                                            </a>
+                                        ) : (
+                                            <Link
+                                                href={`/projects?highlight=${proj.slug}`}
+                                                className="text-slate-400 hover:text-violet-300 transition flex items-center justify-between gap-2"
+                                            >
+                                                <span className="truncate">{proj.title}</span>
+                                                <span className="text-[11px] font-mono text-violet-400 shrink-0">→</span>
+                                            </Link>
+                                        )}
                                     </li>
                                 ))}
                             </ul>

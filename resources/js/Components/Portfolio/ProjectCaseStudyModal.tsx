@@ -127,15 +127,21 @@ export default function ProjectCaseStudyModal({ project, onClose }: ProjectCaseS
                 {/* Action Footer */}
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10">
                     <div className="flex flex-wrap items-center gap-3">
-                        <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-violet-500/20 hover:bg-violet-500/30 border border-violet-400/40 text-xs font-mono font-semibold text-white transition"
-                        >
-                            <span>Visit {project.domainLabel}</span>
-                            <span>↗</span>
-                        </a>
+                        {project.liveUrl ? (
+                            <a
+                                href={project.liveUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-violet-500/20 hover:bg-violet-500/30 border border-violet-400/40 text-xs font-mono font-semibold text-white transition"
+                            >
+                                <span>Visit {project.domainLabel}</span>
+                                <span>↗</span>
+                            </a>
+                        ) : (
+                            <span className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-violet-500/15 border border-violet-400/30 text-xs font-mono text-violet-200">
+                                <span>{project.domainLabel}</span>
+                            </span>
+                        )}
                         <a
                             href={project.repoUrl}
                             target="_blank"

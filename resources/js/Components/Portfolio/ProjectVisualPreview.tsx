@@ -31,12 +31,165 @@ export default function ProjectVisualPreview({ project, compact = false }: Proje
                     <span className="truncate">{project.domainLabel}</span>
                 </div>
                 <div className="text-[10px] font-mono text-violet-300 bg-violet-500/15 border border-violet-400/20 px-1.5 py-0.5 rounded">
-                    LIVE
+                    {project.liveUrl ? 'LIVE' : 'SYSTEM'}
                 </div>
             </div>
 
             {/* Dynamic Mockup Canvas Based on Real Project Type */}
             <div className="relative z-10 flex-1 bg-obsidian-900/90 border-x border-b border-white/10 rounded-b-xl p-3.5 flex flex-col justify-between overflow-hidden">
+                {project.previewType === 'enterprise-analytics' && (
+                    <div className="space-y-2.5">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <div className="text-[10px] font-mono text-emerald-300">
+                                    DJANGO 6 • UNFOLD ANALYTICS ENGINE
+                                </div>
+                                <div className="text-sm font-bold text-white">
+                                    YTD Utilization & Workforce Compliance
+                                </div>
+                            </div>
+                            <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-200 text-[10px] font-mono border border-emerald-400/30">
+                                PDF / XLSX
+                            </span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2">
+                            <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                                <div className="text-[9px] font-mono text-emerald-300">YTD UTILIZATION</div>
+                                <div className="text-xs font-bold text-white mt-0.5">94.8% (+6.2%)</div>
+                            </div>
+                            <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                                <div className="text-[9px] font-mono text-cyan-300">PANDAS MATRIX</div>
+                                <div className="text-xs font-bold text-white mt-0.5">Cross-Tabulated</div>
+                            </div>
+                            <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                                <div className="text-[9px] font-mono text-violet-300">REPORTLAB</div>
+                                <div className="text-xs font-bold text-white mt-0.5">Audit-Ready</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {project.previewType === 'procurement-system' && (
+                    <div className="space-y-2.5">
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <div className="text-[10px] font-mono text-amber-300">
+                                    FINANCIAL GOVERNANCE • BCMATH LEDGER
+                                </div>
+                                <div className="text-sm font-bold text-white">
+                                    Multi-Tier Requisition & Locked Ledger
+                                </div>
+                            </div>
+                            <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-200 text-[10px] font-mono border border-amber-400/30">
+                                Zero-Drift
+                            </span>
+                        </div>
+                        <div className="space-y-1.5">
+                            {[
+                                {
+                                    id: 'REQ-2026-089',
+                                    title: 'Q3 Infrastructure Allocation • Lock Acquired',
+                                    status: 'Approved',
+                                    color: 'text-emerald-300 bg-emerald-500/15',
+                                },
+                                {
+                                    id: 'AUDIT-9941',
+                                    title: 'Polymorphic State Change • Budget Verified',
+                                    status: 'Logged',
+                                    color: 'text-violet-300 bg-violet-500/20',
+                                },
+                            ].map((item) => (
+                                <div
+                                    key={item.id}
+                                    className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-[10px]"
+                                >
+                                    <div className="flex items-center gap-2 truncate">
+                                        <span className="font-mono text-amber-300">{item.id}</span>
+                                        <span className="text-slate-200 truncate">{item.title}</span>
+                                    </div>
+                                    <span className={`px-1.5 py-0.5 rounded font-mono text-[9px] shrink-0 ${item.color}`}>
+                                        {item.status}
+                                    </span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {project.previewType === 'multimedia-collection' && (
+                    <div className="space-y-2.5">
+                        <div className="flex items-center justify-between p-2 rounded-lg bg-fuchsia-500/10 border border-fuchsia-400/25">
+                            <div className="flex items-center gap-2">
+                                <span className="text-xs text-fuchsia-300">🎬</span>
+                                <span className="text-[11px] font-semibold text-white">
+                                    DOST DMC • Asset & Publishing Hub
+                                </span>
+                            </div>
+                            <span className="text-[10px] font-mono text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded">
+                                RBAC Gate Active
+                            </span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-2 text-center">
+                            <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                                <div className="text-[9px] font-mono text-violet-300">WORKFLOW</div>
+                                <div className="text-xs font-bold text-white mt-0.5">3-Tier RBAC</div>
+                            </div>
+                            <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                                <div className="text-[9px] font-mono text-fuchsia-300">INGESTION</div>
+                                <div className="text-xs font-bold text-white mt-0.5">Bulk Media</div>
+                            </div>
+                            <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
+                                <div className="text-[9px] font-mono text-cyan-300">ANALYTICS</div>
+                                <div className="text-xs font-bold text-white mt-0.5">Reach Charts</div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {project.previewType === 'hatian' && (
+                    <div className="space-y-2.5">
+                        <div className="flex items-center justify-between p-2 rounded-lg bg-amber-500/10 border border-amber-500/25">
+                            <div className="flex items-center gap-2">
+                                <span className="text-xs text-amber-400">🧾</span>
+                                <div className="leading-tight">
+                                    <div className="text-[11px] font-bold text-white flex items-center gap-1.5">
+                                        <span>Barkada Milk Tea & Bento Order</span>
+                                        <span className="text-[9px] font-mono text-amber-300 bg-amber-500/20 px-1.5 py-0.2 rounded">
+                                            -₱150 Voucher
+                                        </span>
+                                    </div>
+                                    <div className="text-[9px] font-mono text-teal-300">
+                                        Total ₱980 • Delivery ₱59 • 4 Friends
+                                    </div>
+                                </div>
+                            </div>
+                            <span className="text-[10px] font-mono text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded shrink-0">
+                                Proportional Split
+                            </span>
+                        </div>
+                        <div className="grid grid-cols-3 gap-1.5">
+                            {[
+                                { name: 'Alex', items: 'Bento + Tea', share: '₱285', status: 'Paid ✓', statusColor: 'text-emerald-300' },
+                                { name: 'Bea', items: 'Large Milk Tea', share: '₱165', status: 'Proof Sent', statusColor: 'text-teal-300' },
+                                { name: 'Carl', items: 'Katsudon', share: '₱265', status: 'Pending', statusColor: 'text-amber-300' },
+                            ].map((person) => (
+                                <div key={person.name} className="p-1.5 rounded-lg bg-white/[0.03] border border-white/10">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-[10px] font-bold text-white">{person.name}</span>
+                                        <span className={`text-[8px] font-mono ${person.statusColor}`}>{person.status}</span>
+                                    </div>
+                                    <div className="text-[9px] font-mono text-slate-300 truncate">{person.items}</div>
+                                    <div className="text-xs font-bold text-amber-300 mt-0.5 font-mono">{person.share}</div>
+                                </div>
+                            ))}
+                        </div>
+                        <div className="flex items-center justify-between px-2 py-1 rounded bg-teal-950/40 border border-teal-500/25 text-[10px] font-mono text-slate-300">
+                            <span className="text-teal-300">Hub: GCash • Maya • QR</span>
+                            <span className="text-slate-400">Zero Signup • Guest Link</span>
+                        </div>
+                    </div>
+                )}
+
                 {project.previewType === 'vela-aroma' && (
                     <div className="grid grid-cols-12 gap-3 items-center h-full">
                         <div className="col-span-5 h-28 rounded-xl bg-gradient-to-br from-purple-900/60 via-violet-800/40 to-fuchsia-900/50 border border-violet-400/25 flex flex-col items-center justify-center p-2.5 text-center relative overflow-hidden">
@@ -154,7 +307,7 @@ export default function ProjectVisualPreview({ project, compact = false }: Proje
                         <div className="flex items-center justify-between">
                             <div>
                                 <div className="text-[10px] font-mono text-cyan-300">
-                                    SERVICE DESK • SLA QUEUE
+                                    SERVICE DESK • SLA & TAT QUEUE
                                 </div>
                                 <div className="text-sm font-bold text-white">
                                     Real-Time Ticket Triage & Resolution

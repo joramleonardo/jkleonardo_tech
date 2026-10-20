@@ -4,6 +4,7 @@ import PortfolioLayout from '@/Layouts/PortfolioLayout';
 import SpotlightCard from '@/Components/Portfolio/SpotlightCard';
 import ProfileAvatar from '@/Components/Portfolio/ProfileAvatar';
 import { FAQS, PROJECTS, STUDIO_PROFILE } from '@/data/portfolioData';
+import { PageProps } from '@/types';
 
 const SERVICE_OPTIONS = [
     'Personal / Business Website',
@@ -29,7 +30,7 @@ const TIMELINE_OPTIONS = [
 ];
 
 export default function Contact() {
-    const { props } = usePage<{ flash?: { success?: string } }>();
+    const { props } = usePage<PageProps<{ flash?: { success?: string } }>>();
     const [submittedSuccess, setSubmittedSuccess] = useState(false);
     const [copiedEmail, setCopiedEmail] = useState(false);
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);

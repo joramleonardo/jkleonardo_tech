@@ -3,7 +3,7 @@ export interface ProjectItem {
     slug: string;
     title: string;
     subtitle: string;
-    category: 'Online Shop' | 'Web App' | 'Event App' | 'Portal';
+    category: 'Enterprise System' | 'Online Shop' | 'Web App' | 'Event App' | 'Portal';
     featured: boolean;
     year: string;
     client: string;
@@ -17,12 +17,20 @@ export interface ProjectItem {
     solution: string;
     results: string[];
     technologies: string[];
-    liveUrl: string;
+    liveUrl?: string;
     domainLabel: string;
     repoUrl: string;
     accentFrom: string;
     accentTo: string;
-    previewType: 'vela-aroma' | 'work-scheduler' | 'christmas-party' | 'ticketing-portal';
+    previewType:
+        | 'vela-aroma'
+        | 'work-scheduler'
+        | 'christmas-party'
+        | 'ticketing-portal'
+        | 'enterprise-analytics'
+        | 'procurement-system'
+        | 'multimedia-collection'
+        | 'hatian';
 }
 
 export interface ServiceItem {
@@ -77,9 +85,11 @@ export interface ResumeEducationItem {
 
 export interface ResumeProjectItem {
     title: string;
+    subtitle?: string;
     organization: string;
     technologies: string[];
     description: string;
+    highlights?: string[];
     liveUrl?: string;
 }
 
@@ -88,6 +98,12 @@ export interface ResumeReferenceItem {
     role: string;
     organization: string;
     phone: string;
+}
+
+export interface ResumeSkillGroup {
+    category: string;
+    badge: string;
+    skills: string[];
 }
 
 export const STUDIO_PROFILE = {
@@ -100,9 +116,9 @@ export const STUDIO_PROFILE = {
     fallbackPhotoUrl: 'https://avatars.githubusercontent.com/u/46211987?v=4',
     resumePdfUrl: '/resume/Joram-Kate-Leonardo-Resume.pdf',
     tagline:
-        'Detail-oriented Full Stack Web Developer experienced in developing, maintaining, and deploying web-based information systems, online stores, and custom web applications.',
+        'Detail-oriented Full Stack Web Developer with 6+ years of experience engineering, deploying, and maintaining mission-critical, database-driven information systems, analytics platforms, and custom web applications.',
     resumeSummary:
-        'Detail-oriented Full Stack Web Developer with experience in developing, maintaining, and deploying web-based information systems for government and client projects. Skilled in Laravel, Vue.js, React, Inertia.js, MySQL, Tailwind CSS, database-driven application development, and AI-assisted development tools. Experienced in database administration, system customization, user support, system deployment, and project coordination, with a strong ability to translate operational requirements into functional and user-friendly systems.',
+        'Detail-oriented Full Stack Web Developer with 6+ years of experience engineering, deploying, and maintaining mission-critical, database-driven information systems for government initiatives. Specialized in Object-Oriented Programming (OOP) and modern full-stack architectures utilizing PHP (Laravel), Python (Django 6), Vue 3, React 19, Inertia.js v2, and MySQL. Proven track record of translating complex operational, financial, and institutional workflows into high-concurrency, auditable digital platforms while leveraging AI-assisted development and prompt engineering to accelerate end-to-end software delivery, database administration, and user onboarding.',
     availabilityText: 'Available for Web Projects & Development Inquiries',
     email: 'jkleonardo.tech@gmail.com',
     personalEmail: 'joramkatesleonardo@gmail.com',
@@ -113,71 +129,115 @@ export const STUDIO_PROFILE = {
     location: 'Imus, Cavite, Philippines',
     responseTime: 'Within 24 Hours',
     stats: [
-        { value: '7+ Yrs', label: 'IT & Dev Experience', detail: 'Since 2018 at DOST' },
-        { value: '8+', label: 'Systems Built', detail: 'Gov & Client Web Apps' },
-        { value: 'Full-Stack', label: 'Laravel • Vue • React', detail: 'Inertia.js & MySQL' },
-        { value: '100%', label: 'User-Friendly', detail: 'Clean & Practical UI' },
+        { value: '6+ Yrs', label: 'Full-Stack Experience', detail: 'Since 2018 at DOST' },
+        { value: '10+', label: 'Systems Engineered', detail: 'Enterprise, Gov & Client' },
+        { value: 'Full-Stack', label: 'Laravel • Django • Vue • React', detail: 'Inertia.js v2 & MySQL' },
+        { value: '100%', label: 'Audit-Ready & Reliable', detail: 'OOP, RBAC & Pest Tested' },
     ],
     socials: [
         { name: 'GitHub', url: 'https://github.com/joramleonardo', handle: '@joramleonardo' },
+        { name: 'Hatian Splitter', url: 'https://hatian.jkleonardo.tech', handle: 'hatian.jkleonardo.tech' },
+        { name: 'Ticketing Portal', url: 'https://ticketingportal.jkleonardo.tech', handle: 'ticketingportal.jkleonardo.tech' },
         { name: 'Vela Aroma PH', url: 'https://velaaromaph.jkleonardo.tech', handle: 'velaaromaph.jkleonardo.tech' },
         { name: 'ShiftSync Scheduler', url: 'https://workscheduler.jkleonardo.tech', handle: 'workscheduler.jkleonardo.tech' },
         { name: 'Party Planner Hub', url: 'https://christmasparty.jkleonardo.tech', handle: 'christmasparty.jkleonardo.tech' },
     ],
 };
 
+export const RESUME_SKILL_GROUPS: ResumeSkillGroup[] = [
+    {
+        category: 'Backend Engineering',
+        badge: 'PHP & Python',
+        skills: [
+            'PHP 8.2+',
+            'Laravel (v10 / v12)',
+            'Python 3.12',
+            'Django 6',
+            'RESTful APIs',
+            'Queued Workflows',
+            'Laravel Sanctum',
+            'Pest',
+            'PHP bcmath',
+        ],
+    },
+    {
+        category: 'Frontend Architecture',
+        badge: 'Modern Reactive UI',
+        skills: [
+            'Vue 3',
+            'React 19',
+            'Inertia.js v2',
+            'TypeScript',
+            'Tailwind CSS',
+            'Unfold',
+            'Vite',
+            'Axios',
+            'Chart.js',
+        ],
+    },
+    {
+        category: 'Database & Data Analytics',
+        badge: 'Data & Reporting',
+        skills: [
+            'MySQL',
+            'Pandas',
+            'Matplotlib',
+            'ReportLab',
+            'Schema Design',
+            'Concurrency Control (Pessimistic Locking)',
+            'Query Optimization',
+        ],
+    },
+    {
+        category: 'Architecture, AI & Ops',
+        badge: 'Systems & Governance',
+        skills: [
+            'Object-Oriented Programming (OOP)',
+            'AI-Assisted Development',
+            'Prompt Engineering',
+            'Role-Based Access Control (RBAC)',
+            'Polymorphic Audit Trails',
+            'Google Sheets API',
+        ],
+    },
+];
+
 export const RESUME_EXPERIENCE: ResumeExperienceItem[] = [
     {
-        period: 'March 2021 – Present',
+        period: 'Mar 2021 – Present',
         role: 'Computer Programmer II',
         organization: 'DOST-STII',
         location: 'Taguig, Metro Manila / Philippines',
         summary:
-            'Lead full-stack development, database management, and deployment of web-based information systems for DOST-STII.',
+            'Analyze, design, and implement web-based information systems using object-oriented design patterns and relational database architectures across institutional agency programs.',
         highlights: [
-            'Analyze, design, and implement information systems and databases.',
-            'Facilitate system development, customization, deployment, and maintenance.',
-            'Manage database administration and system maintenance activities.',
-            'Conduct system deployment, user training, and technical support.',
+            'Analyze, design, and implement web-based information systems using object-oriented design patterns and relational database architectures across institutional agency programs.',
+            'Direct database administration, system customization, staging deployments, and ongoing production maintenance while utilizing AI-assisted workflows and prompt engineering for rapid prototyping, code refactoring, and debugging.',
+            'Conduct structured end-user onboarding, technical staff trainings, and Tier-2/3 software troubleshooting support.',
         ],
     },
     {
-        period: 'January 2020 – February 2021',
+        period: 'Jan 2020 – Feb 2021',
         role: 'Project Assistant II',
         organization: 'DOST-MIMAROPA',
         location: 'Philippines',
         summary:
-            'Supported regional health technology rollout, field deployment, and coordination with medical teams.',
+            'Supported the regional rollout and hardware distribution of RxBox diagnostic telehealth units to rural health units (RHUs).',
         highlights: [
-            'Assisted in the implementation of the "Rollout of RxBox Units" project.',
-            'Facilitated the distribution and deployment of RxBox units.',
-            'Coordinated closely with the RxBox RMT and RHU teams.',
-            'Provided secretariat support for meetings, documentation, and other project-related activities.',
+            'Supported the regional rollout and hardware distribution of RxBox diagnostic telehealth units to rural health units (RHUs).',
+            'Liaised between Regional Management Teams (RMT) and local medical personnel, providing operational secretariat and reporting support.',
         ],
     },
     {
-        period: 'July 2019 – February 2021',
-        role: 'Computer Maintenance Technologist I',
+        period: 'Jul 2018 – Feb 2021',
+        role: 'Computer Maintenance Technologist I / Operator IV',
         organization: 'DOST-STII',
         location: 'Philippines',
         summary:
-            'Developed internal knowledge systems and provided technical support and end-user training.',
+            'Built and launched an internal Knowledge Management System for documentation retention and institutional retrieval while delivering technical support.',
         highlights: [
-            'Developed and implemented a Knowledge Management System.',
-            'Facilitated system deployment and user training.',
-            'Provided hardware and software technical support to end users.',
-        ],
-    },
-    {
-        period: 'July 2018 – March 2019',
-        role: 'Computer Operator IV',
-        organization: 'DOST-STII',
-        location: 'Philippines',
-        summary:
-            'Assisted in designing, building, and deploying internal information systems.',
-        highlights: [
-            'Analyzed, designed, and implemented information systems.',
-            'Assisted in system development, deployment, and training activities.',
+            'Built and launched an internal Knowledge Management System for documentation retention and institutional retrieval.',
+            'Delivered technical hardware/software support and assisted in database maintenance across department divisions.',
         ],
     },
 ];
@@ -188,101 +248,386 @@ export const RESUME_EDUCATION: ResumeEducationItem[] = [
         degree: 'Bachelor of Science in Computer Science',
         school: 'De La Salle University - Dasmariñas',
         details:
-            'Studied software engineering, database systems, systems analysis & design, and full-stack web application development.',
+            'Studied software engineering, object-oriented programming, database systems, systems analysis & design, and full-stack web application development.',
     },
 ];
 
 export const RESUME_PROJECTS: ResumeProjectItem[] = [
     {
-        title: 'DOST-STII Library Online Public Access Catalog (OPAC)',
+        title: 'Enterprise Operations & Analytics System',
+        subtitle: 'Full-Stack Analytics & Reporting Platform',
+        organization: 'Enterprise / Institutional',
+        technologies: [
+            'Python 3.12',
+            'Django 6',
+            'Tailwind CSS / Unfold',
+            'Pandas',
+            'Matplotlib',
+            'ReportLab',
+        ],
+        description:
+            'Full-stack enterprise analytics and reporting system featuring longitudinal Year-to-Date (YTD) utilization tracking, executive dashboards, cross-tabulated workforce compliance matrices, and audit-ready PDF/Excel export pipelines.',
+        highlights: [
+            'Engineered a full-stack enterprise analytics and reporting system featuring longitudinal Year-to-Date (YTD) utilization tracking and executive dashboards.',
+            'Developed cross-tabulated workforce compliance matrices using Pandas and automated visual diagnostics powered by Matplotlib.',
+            'Built audit-ready document generation and reporting export pipelines supporting both PDF (ReportLab) and Excel formats.',
+        ],
+    },
+    {
+        title: 'IT Ticketing Management System',
+        subtitle: 'Full-Stack Operational Workflow Platform',
         organization: 'DOST-STII',
         technologies: [
             'Laravel 12',
             'PHP 8.2',
-            'React 18',
+            'Vue 3',
+            'Inertia.js v2',
+            'Pest',
+            'MySQL',
+            'Tailwind CSS',
+            'Chart.js',
+            'Google Sheets API',
+        ],
+        description:
+            'Centralized operational workflow system featuring a public request portal, role-based internal administrative dashboard, real-time SLA and turnaround time (TAT) tracking, and Google Sheets compliance auditing.',
+        highlights: [
+            'Engineered a centralized operational workflow system featuring a public request portal and a role-based internal administrative dashboard.',
+            'Architected real-time SLA and turnaround time (TAT) tracking mechanisms with closed-loop threaded notifications for issue resolution.',
+            'Built an automated third-party compliance auditing pipeline via Google Sheets API synchronization and interactive analytics with Chart.js.',
+            'Guaranteed regression-free feature deployment and endpoint reliability through automated test coverage using Pest.',
+        ],
+        liveUrl: 'https://ticketingportal.jkleonardo.tech',
+    },
+    {
+        title: 'Procurement Management System',
+        subtitle: 'Financial Governance & Requisition Platform',
+        organization: 'Enterprise / Institutional',
+        technologies: [
+            'Laravel 12',
+            'React 19',
+            'Inertia.js v2',
+            'TypeScript',
+            'Tailwind CSS',
+            'MySQL',
+            'PHP bcmath',
+        ],
+        description:
+            'Enterprise financial governance platform supporting multi-tier requisition workflows, zero-drift fiscal utilization tracking with PHP bcmath, concurrency-safe pessimistic locking, and polymorphic audit logging.',
+        highlights: [
+            'Developed an enterprise financial governance platform supporting multi-tier requisition workflows and approval pipelines.',
+            'Implemented zero-drift fiscal and budget utilization tracking utilizing PHP bcmath for exact-precision arithmetic calculations.',
+            'Secured financial ledger consistency against race conditions during peak submission windows using concurrency-safe pessimistic locking.',
+            'Constructed HIPAA-aligned polymorphic audit logging across state changes, milestone approvals, and administrative actions.',
+        ],
+    },
+    {
+        title: 'DOST Multimedia Collection (DMC) System',
+        subtitle: 'Enterprise Asset & Publishing Repository',
+        organization: 'DOST-STII',
+        technologies: [
+            'Laravel 12',
+            'Vue 3',
+            'Inertia.js v2',
+            'MySQL',
+            'Tailwind CSS',
+            'Laravel Sanctum',
+            'Pest',
+            'Chart.js',
+        ],
+        description:
+            'Role-based digital asset repository with multi-tier RBAC workflows (Author, Reviewer, Publisher), transactional bulk media upload pipelines, administrative audit logging, and public discovery dashboards.',
+        highlights: [
+            'Architected a role-based digital asset repository with multi-tier RBAC workflows (Author, Reviewer, Publisher) and gate validation.',
+            'Engineered transactional bulk media upload and processing pipelines to reliably ingest high-resolution event media.',
+            'Implemented detailed administrative audit logging to record rights updates, editorial revisions, and publishing status changes.',
+            'Built a public search and discovery interface accompanied by real-time visualization dashboards monitoring media reach.',
+        ],
+    },
+    {
+        title: 'DOST-STII Library Online Public Access Catalog (OPAC)',
+        subtitle: 'SciNET-PHIL Union Catalog Platform',
+        organization: 'DOST-STII',
+        technologies: [
+            'Laravel 12',
+            'PHP 8.2',
+            'React',
             'TypeScript',
             'Inertia.js',
             'Tailwind CSS',
             'MySQL',
             'Vite',
-            'Node.js',
         ],
         description:
-            'A web-based Online Public Access Catalog for the DOST SciNET-PHIL union catalog, allowing users to search and browse library materials across DOST libraries and information centers.',
+            'A web-based Online Public Access Catalog for the DOST SciNET-PHIL union catalog, allowing researchers and citizens to search and browse library materials across DOST libraries and information centers.',
     },
     {
         title: 'DOSTv Project Management System',
+        subtitle: 'Broadcast Production Lifecycle Platform',
         organization: 'DOST-STII',
         technologies: [
             'Laravel 10',
-            'PHP 8.1+',
-            'Vue.js 3',
+            'PHP 8.2',
+            'Vue 3',
             'Inertia.js',
             'MySQL',
             'Tailwind CSS',
             'Vite',
             'Axios',
             'Chart.js',
-            'Node.js',
         ],
         description:
             'A web-based system that manages the full lifecycle of TV production projects, including project setup, task assignment, progress tracking, file submission, review, and monitoring.',
     },
     {
-        title: 'DOST Multimedia Collection',
-        organization: 'DOST-STII',
+        title: 'Hatian — Smart Group Order & Bill Splitter',
+        subtitle: 'Group Expense & Multi-Channel Payment Hub',
+        organization: 'Personal / Open-Source Product',
         technologies: [
-            'Laravel 12',
-            'Vue 3',
-            'Inertia.js',
-            'MySQL',
-            'Tailwind CSS',
-            'Vite',
-            'Laravel Sanctum',
-            'Node.js',
-            'Chart.js',
-        ],
-        description:
-            'A role-based multimedia archive and publishing system for managing DOST event albums, photos, and videos. Includes an internal workflow where authors prepare event collections, publishers review and publish content, and a public-facing website for browsing media resources.',
-    },
-    {
-        title: 'DOST-STII Ticketing Management System',
-        organization: 'DOST-STII',
-        technologies: [
-            'Laravel 12',
+            'Laravel 11',
             'PHP 8.2',
-            'Vue 3',
-            'Inertia.js',
-            'Tailwind CSS',
+            'React 19',
+            'Inertia.js v2',
+            'TypeScript',
+            'Tailwind CSS v4',
             'MySQL',
-            'Laravel Sanctum',
-            'Pest',
-            'Chart.js',
-            'Queued Email Workflows',
-            'Google Sheets API',
         ],
         description:
-            'A centralized ticket monitoring and administration system designed to manage service requests efficiently. Features a public portal where clients submit requests and an internal dashboard for staff to monitor, filter, update, and resolve tickets.',
-        liveUrl: 'https://ticketingportal.jkleonardo.tech',
+            'A modern, transparent, and mobile-friendly group expense and bill-splitting web application featuring proportional group discounts, delivery fee distribution, receipt uploads, Philippine digital payment hubs with QR codes, and proof verification.',
+        highlights: [
+            'Engineered proportional mathematical breakdown algorithms distributing fixed/percentage vouchers and delivery fees fairly based on individual spend.',
+            'Architected zero-barrier guest split workflows with secure cookie edit tokens and seamless account-claim migrations.',
+            'Integrated multi-channel payment hub supporting 9+ Philippine digital wallets & banks with interactive QR code modals.',
+            'Built high-performance payment proof upload pipelines featuring client-side canvas compression for instantaneous mobile uploads.',
+        ],
+        liveUrl: 'https://hatian.jkleonardo.tech',
     },
 ];
 
 export const RESUME_REFERENCES: ResumeReferenceItem[] = [
     {
         name: 'Chester Francisco',
-        role: 'Information Technology Officer I',
+        role: 'Information Technology Officer II',
         organization: 'DOST-STII',
         phone: '0966 970 9726',
     },
     {
         name: 'Etienne Wayne Amparado',
-        role: 'Science Research Specialist I',
+        role: 'Science Research Specialist II',
         organization: 'DOST-STII',
         phone: '0970 610 2876',
     },
 ];
 
 export const PROJECTS: ProjectItem[] = [
+    {
+        id: 'enterprise-operations-analytics',
+        slug: 'enterprise-analytics',
+        title: 'Enterprise Operations & Analytics System',
+        subtitle: 'Full-Stack Analytics & Reporting Platform',
+        category: 'Enterprise System',
+        featured: true,
+        year: '2026',
+        client: 'Enterprise Operations',
+        role: 'Full Stack Web Developer',
+        duration: 'Production Platform',
+        impactMetric: 'YTD Analytics',
+        impactLabel: '& PDF/Excel Exports',
+        secondaryMetric: 'Django 6 + Pandas',
+        description:
+            'A full-stack enterprise analytics and reporting platform featuring longitudinal Year-to-Date (YTD) utilization tracking, executive dashboards, cross-tabulated workforce compliance matrices, and audit-ready PDF/Excel export pipelines.',
+        challenge:
+            'Consolidating longitudinal workforce utilization and compliance metrics across departments manually in spreadsheets delayed executive reporting and audit readiness.',
+        solution:
+            'Engineered an integrated analytics platform using Python 3.12, Django 6, and Unfold with Pandas cross-tabulation, Matplotlib visual diagnostics, and automated ReportLab PDF & Excel export pipelines.',
+        results: [
+            'Engineered a full-stack enterprise analytics and reporting system featuring longitudinal Year-to-Date (YTD) utilization tracking and executive dashboards',
+            'Developed cross-tabulated workforce compliance matrices using Pandas and automated visual diagnostics powered by Matplotlib',
+            'Built audit-ready document generation and reporting export pipelines supporting both PDF (ReportLab) and Excel formats',
+        ],
+        technologies: [
+            'Python 3.12',
+            'Django 6',
+            'Tailwind CSS / Unfold',
+            'Pandas',
+            'Matplotlib',
+            'ReportLab',
+        ],
+        domainLabel: 'Enterprise Analytics • Django 6',
+        repoUrl: 'https://github.com/joramleonardo',
+        accentFrom: 'from-emerald-600',
+        accentTo: 'to-cyan-500',
+        previewType: 'enterprise-analytics',
+    },
+    {
+        id: 'ticketing-portal',
+        slug: 'ticketingportal',
+        title: 'IT Ticketing Management System',
+        subtitle: 'Full-Stack Operational Workflow Platform',
+        category: 'Portal',
+        featured: true,
+        year: '2026',
+        client: 'DOST-STII / Support Operations',
+        role: 'Full Stack Web Developer',
+        duration: 'Live Web App',
+        impactMetric: 'Real-Time SLA',
+        impactLabel: '& TAT Workflow',
+        secondaryMetric: 'Pest Tested + Sheets Sync',
+        description:
+            'A centralized operational workflow system featuring a public request portal, a role-based internal administrative dashboard, real-time SLA and turnaround time (TAT) tracking, and automated Google Sheets compliance auditing.',
+        challenge:
+            'Service requests scattered across manual messages and forms made it difficult to enforce SLAs, monitor turnaround times (TAT), and maintain third-party compliance logs.',
+        solution:
+            'Built a full-stack operational workflow platform using Laravel 12, PHP 8.2, Vue 3, and Inertia.js v2 with closed-loop threaded notifications, Google Sheets API synchronization, Chart.js analytics, and Pest automated tests.',
+        results: [
+            'Engineered a centralized operational workflow system featuring a public request portal and a role-based internal administrative dashboard',
+            'Architected real-time SLA and turnaround time (TAT) tracking mechanisms with closed-loop threaded notifications for issue resolution',
+            'Built an automated third-party compliance auditing pipeline via Google Sheets API synchronization and interactive analytics with Chart.js',
+            'Guaranteed regression-free feature deployment and endpoint reliability through automated test coverage using Pest',
+        ],
+        technologies: [
+            'Laravel 12',
+            'PHP 8.2',
+            'Vue 3',
+            'Inertia.js v2',
+            'Pest',
+            'MySQL',
+            'Tailwind CSS',
+            'Chart.js',
+            'Google Sheets API',
+        ],
+        liveUrl: 'https://ticketingportal.jkleonardo.tech',
+        domainLabel: 'ticketingportal.jkleonardo.tech',
+        repoUrl: 'https://github.com/joramleonardo',
+        accentFrom: 'from-violet-600',
+        accentTo: 'to-cyan-500',
+        previewType: 'ticketing-portal',
+    },
+    {
+        id: 'hatian-bill-splitter',
+        slug: 'hatian',
+        title: 'Hatian — Smart Bill & Pasabuy Splitter',
+        subtitle: 'Smart Group Order, Pasabuy & Barkada Bill Splitter',
+        category: 'Web App',
+        featured: true,
+        year: '2026',
+        client: 'Barkada Dining & Group Pasabuy',
+        role: 'Full Stack Web Developer',
+        duration: 'Live Web App',
+        impactMetric: 'Smart Splits',
+        impactLabel: '& Payment Hub',
+        secondaryMetric: 'Zero Signup + GCash/Maya QR',
+        description:
+            'A modern, transparent, and mobile-friendly group expense and bill-splitting web app built for barkada dining, GrabFood / Foodpanda group orders, overseas pasabuys, and shared trips. Features automatic proportional voucher discounts, delivery fee splitting, receipt attachments, and an all-in-one Philippine payment hub with QR codes.',
+        challenge:
+            'When splitting group food orders or shopping pasabuys, distributing promo vouchers (e.g. ₱150 OFF) and delivery fees fairly is frustrating, while chasing payments and asking "Magkano akin?" or "Saan magbabayad?" creates constant group chat friction.',
+        solution:
+            'I built Hatian with Laravel 11, React 19, Inertia.js v2, and Tailwind CSS to automatically calculate proportional discounts, generate zero-barrier shareable guest links, support up to 5 order receipt uploads, and provide an all-in-one payment hub with GCash, Maya, bank details, QR codes, and proof verification.',
+        results: [
+            'Fair mathematical breakdown distributing percentage or fixed-amount vouchers and delivery fees proportionally',
+            'Zero-signup guest creation with secure edit tokens and instant mobile link sharing',
+            'Order receipt upload pipeline supporting up to 5 high-resolution bill screenshots with lightbox inspection',
+            'Multi-channel payment hub (GCash, Maya, GoTyme, BPI, BDO) with instant copy and QR code modals',
+            'Mandatory payment screenshot proof upload featuring client-side canvas compression for mobile data savings',
+            'Optional user accounts with automatic claiming of past guest splits and settlement analytics dashboards',
+        ],
+        technologies: [
+            'Laravel 11',
+            'React 19',
+            'Inertia.js v2',
+            'TypeScript',
+            'Tailwind CSS v4',
+            'MySQL',
+        ],
+        liveUrl: 'https://hatian.jkleonardo.tech',
+        domainLabel: 'hatian.jkleonardo.tech',
+        repoUrl: 'https://github.com/joramleonardo/hatian',
+        accentFrom: 'from-amber-600',
+        accentTo: 'to-teal-500',
+        previewType: 'hatian',
+    },
+    {
+        id: 'procurement-management-system',
+        slug: 'procurement-system',
+        title: 'Procurement Management System',
+        subtitle: 'Financial Governance & Requisition Platform',
+        category: 'Enterprise System',
+        featured: true,
+        year: '2026',
+        client: 'Financial Governance & Operations',
+        role: 'Full Stack Web Developer',
+        duration: 'Enterprise Platform',
+        impactMetric: 'Zero-Drift',
+        impactLabel: 'bcmath Ledger',
+        secondaryMetric: 'Pessimistic Locking + Audit',
+        description:
+            'An enterprise financial governance platform supporting multi-tier requisition workflows and approval pipelines with exact-precision PHP bcmath budget tracking, concurrency-safe pessimistic locking, and HIPAA-aligned polymorphic audit trails.',
+        challenge:
+            'High-concurrency budget submissions and multi-tier requisition approvals risked floating-point drift, race conditions during peak windows, and incomplete compliance trails.',
+        solution:
+            'Architected a financial governance system with Laravel 12, React 19, Inertia.js v2, and TypeScript utilizing PHP bcmath for exact arithmetic, database pessimistic locking, and polymorphic audit logging.',
+        results: [
+            'Developed an enterprise financial governance platform supporting multi-tier requisition workflows and approval pipelines',
+            'Implemented zero-drift fiscal and budget utilization tracking utilizing PHP bcmath for exact-precision arithmetic calculations',
+            'Secured financial ledger consistency against race conditions during peak submission windows using concurrency-safe pessimistic locking',
+            'Constructed HIPAA-aligned polymorphic audit logging across state changes, milestone approvals, and administrative actions',
+        ],
+        technologies: [
+            'Laravel 12',
+            'React 19',
+            'Inertia.js v2',
+            'TypeScript',
+            'Tailwind CSS',
+            'MySQL',
+            'PHP bcmath',
+        ],
+        domainLabel: 'Financial Governance • React 19',
+        repoUrl: 'https://github.com/joramleonardo',
+        accentFrom: 'from-amber-500',
+        accentTo: 'to-violet-600',
+        previewType: 'procurement-system',
+    },
+    {
+        id: 'dost-multimedia-collection',
+        slug: 'dost-multimedia-collection',
+        title: 'DOST Multimedia Collection (DMC) System',
+        subtitle: 'Enterprise Asset & Publishing Repository',
+        category: 'Enterprise System',
+        featured: true,
+        year: '2026',
+        client: 'DOST-STII',
+        role: 'Full Stack Web Developer',
+        duration: 'Institutional Repository',
+        impactMetric: 'Multi-Tier RBAC',
+        impactLabel: 'Asset Repository',
+        secondaryMetric: 'Bulk Media + Reach Analytics',
+        description:
+            'A role-based digital asset repository with multi-tier RBAC workflows (Author, Reviewer, Publisher), transactional bulk media upload pipelines, detailed administrative audit logging, and public discovery dashboards.',
+        challenge:
+            'Managing thousands of high-resolution institutional event photos and videos required strict editorial gate validation, rights tracking, and reliable bulk ingestion.',
+        solution:
+            'Engineered the DOST Multimedia Collection (DMC) System on Laravel 12, Vue 3, and Inertia.js v2 with multi-tier RBAC workflows, transactional media processing, audit trails, and Chart.js reach visualizations.',
+        results: [
+            'Architected a role-based digital asset repository with multi-tier RBAC workflows (Author, Reviewer, Publisher) and gate validation',
+            'Engineered transactional bulk media upload and processing pipelines to reliably ingest high-resolution event media',
+            'Implemented detailed administrative audit logging to record rights updates, editorial revisions, and publishing status changes',
+            'Built a public search and discovery interface accompanied by real-time visualization dashboards monitoring media reach',
+        ],
+        technologies: [
+            'Laravel 12',
+            'Vue 3',
+            'Inertia.js v2',
+            'MySQL',
+            'Tailwind CSS',
+            'Laravel Sanctum',
+            'Pest',
+            'Chart.js',
+        ],
+        domainLabel: 'DOST-STII • DMC Repository',
+        repoUrl: 'https://github.com/joramleonardo',
+        accentFrom: 'from-fuchsia-600',
+        accentTo: 'to-indigo-500',
+        previewType: 'multimedia-collection',
+    },
     {
         id: 'vela-aroma-ph',
         slug: 'velaaromaph',
@@ -382,64 +727,22 @@ export const PROJECTS: ProjectItem[] = [
         accentTo: 'to-rose-500',
         previewType: 'christmas-party',
     },
-    {
-        id: 'ticketing-portal',
-        slug: 'ticketingportal',
-        title: 'Ticketing Management System',
-        subtitle: 'Centralized Service Request & Ticket Monitoring Portal',
-        category: 'Portal',
-        featured: true,
-        year: '2026',
-        client: 'DOST-STII / Support Operations',
-        role: 'Full Stack Web Developer',
-        duration: 'Live Web App',
-        impactMetric: 'End-to-End',
-        impactLabel: 'Ticket Workflow',
-        secondaryMetric: 'Public + Staff Portal',
-        description:
-            'A centralized ticket monitoring and administration system designed to manage service requests efficiently. Includes a public website where clients submit requests and an internal dashboard for staff to monitor, filter, update, and resolve tickets.',
-        challenge:
-            'Service requests scattered across manual messages and forms made it difficult to track ticket statuses, generate reports, and coordinate resolutions.',
-        solution:
-            'I built a complete ticketing portal using Laravel 12, Vue 3, and Inertia.js with status tracking, pagination, queued email notifications, Chart.js analytics, and Google Sheets sync.',
-        results: [
-            'Public-facing portal for easy client service request submission',
-            'Staff dashboard to search, filter, update, and manage tickets end-to-end',
-            'Automated queued email workflows and Chart.js reporting',
-        ],
-        technologies: [
-            'Laravel 12',
-            'PHP 8.2',
-            'Vue 3',
-            'Inertia.js',
-            'Tailwind CSS',
-            'MySQL',
-            'Chart.js',
-            'Google Sheets API',
-        ],
-        liveUrl: 'https://ticketingportal.jkleonardo.tech',
-        domainLabel: 'ticketingportal.jkleonardo.tech',
-        repoUrl: 'https://github.com/joramleonardo',
-        accentFrom: 'from-violet-600',
-        accentTo: 'to-cyan-500',
-        previewType: 'ticketing-portal',
-    },
 ];
 
 export const SERVICES: ServiceItem[] = [
     {
         id: 'custom-web-apps',
         title: 'Custom Web Systems & Information Portals',
-        tagline: 'Like OPAC, Project Management & Ticketing Systems',
+        tagline: 'Like Enterprise Analytics, Procurement, DMC & Ticketing Systems',
         description:
-            'Need a custom web system for your organization or team? I design and build database-driven web applications tailored to your daily operations.',
+            'Need a custom web system for your organization or team? I design and build database-driven web applications, analytics dashboards, and workflow platforms tailored to your daily operations.',
         deliverables: [
-            'Role-based dashboards for admins, staff, and clients',
-            'Search, filtering, status tracking, and data charts',
-            'Automated email notifications and reporting',
-            'Clean, user-friendly interface that works on any device',
+            'Role-based dashboards (RBAC) for admins, reviewers, staff, and clients',
+            'Analytics, YTD reporting, PDF/Excel exports, and audit trails',
+            'Automated email notifications, SLA tracking, and API integrations',
+            'Clean, high-concurrency architecture that works on any device',
         ],
-        impact: 'Turn manual paperwork and spreadsheets into an organized web system.',
+        impact: 'Turn manual paperwork and spreadsheets into an auditable web platform.',
         iconName: 'code',
     },
     {
@@ -460,10 +763,11 @@ export const SERVICES: ServiceItem[] = [
     {
         id: 'interactive-event-portals',
         title: 'Event, Booking & Team Web Apps',
-        tagline: 'Like ShiftSync & Christmas Party Planner',
+        tagline: 'Like Hatian, ShiftSync & Christmas Party Planner',
         description:
             'Interactive web apps for team scheduling, company events, or group activities—complete with shareable links, live voting, or expense trackers.',
         deliverables: [
+            'Group bill splitters, pasabuy calculators & payment hubs',
             'Team shift schedulers and overtime trackers',
             'Interactive event hubs, Secret Santa & wishlists',
             'Live polls, voting boards, and GCash splitters',
@@ -552,10 +856,10 @@ export const PROCESS_STEPS: ProcessStep[] = [
         title: 'Development & Testing',
         timeline: 'Step 3',
         description:
-            'I build the frontend, backend, and database using Laravel, Vue.js/React, and Tailwind CSS, and share a test link so you can try it out.',
+            'I build the frontend, backend, and database using Laravel (PHP) or Django (Python), Vue 3/React 19, Inertia.js, and Tailwind CSS, and share a test link so you can try it out.',
         deliverables: [
             'Working web system & database',
-            'Admin dashboard & user roles',
+            'Admin dashboard, RBAC & audit trails',
             'Live preview link for your feedback',
         ],
     },
@@ -576,11 +880,11 @@ export const PROCESS_STEPS: ProcessStep[] = [
 export const FAQS: FaqItem[] = [
     {
         question: 'Can you build a website with an Admin Panel so I can update it myself?',
-        answer: 'Yes! Just like Vela Aroma PH and the systems I have built, I can include a simple Admin Dashboard where you can manage content, products, or requests without touching code.',
+        answer: 'Yes! Just like Vela Aroma PH and the enterprise systems I have built, I include role-based Admin Dashboards where you can manage content, products, approvals, or requests without touching code.',
     },
     {
         question: 'What types of systems have you built?',
-        answer: 'I have developed online stores (Vela Aroma PH), team schedulers (ShiftSync), event apps (Christmas Party Hub), library catalogs (OPAC), project management systems (DOSTv PMS), multimedia archives, and ticketing portals.',
+        answer: 'I have engineered enterprise operations & analytics platforms (Django 6 / Pandas / ReportLab), procurement & financial governance systems, IT ticketing portals, smart group bill & pasabuy splitters (Hatian), multimedia asset repositories (DOST DMC), online stores (Vela Aroma PH), team schedulers (ShiftSync), event apps (Christmas Party Hub), library catalogs (OPAC), and broadcast project management systems (DOSTv PMS).',
     },
     {
         question: 'How long does it take to finish a website?',

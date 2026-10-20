@@ -10,39 +10,13 @@ import {
     RESUME_EXPERIENCE,
     RESUME_PROJECTS,
     RESUME_REFERENCES,
+    RESUME_SKILL_GROUPS,
     STUDIO_PROFILE,
 } from '@/data/portfolioData';
 
 export default function About() {
     const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
-
-    const skillGroups = [
-        {
-            category: 'Frontend & Web Design',
-            badge: 'Clean UI/UX',
-            skills: ['Vue.js 3', 'React 18', 'TypeScript', 'Inertia.js', 'Tailwind CSS', 'Chart.js & Data Visualization'],
-        },
-        {
-            category: 'Backend & Databases',
-            badge: 'Full-Stack',
-            skills: ['Laravel (10 / 12)', 'PHP 8.1 / 8.2+', 'MySQL & Database Admin', 'Laravel Sanctum', 'Queued Email Workflows', 'Google Sheets API'],
-        },
-        {
-            category: 'Systems & Project Delivery',
-            badge: 'Operations',
-            skills: [
-                'Information Systems Analysis & Design',
-                'System Customization & Maintenance',
-                'End-User Training & Technical Support',
-                'Project Coordination',
-            ],
-        },
-        {
-            category: 'Hosting & Tools',
-            badge: 'Deployment',
-            skills: ['Git & GitHub (@joramleonardo)', 'Vite & Node.js', 'Pest Testing', 'AI-Assisted Dev Tools'],
-        },
-    ];
+    const liveProjects = PROJECTS.filter((p) => Boolean(p.liveUrl));
 
     return (
         <PortfolioLayout>
@@ -116,9 +90,9 @@ export default function About() {
                                 </div>
 
                                 <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-white tracking-tight leading-tight">
-                                    Full Stack Web Developer turning operational needs into{' '}
+                                    Full Stack Web Developer turning complex workflows into{' '}
                                     <span className="bg-gradient-to-r from-violet-400 via-fuchsia-300 to-indigo-400 bg-clip-text text-transparent">
-                                        user-friendly systems.
+                                        auditable digital platforms.
                                     </span>
                                 </h2>
 
@@ -231,7 +205,7 @@ export default function About() {
                                     Live Portfolio Links (*.jkleonardo.tech)
                                 </div>
                                 <div className="space-y-2.5">
-                                    {PROJECTS.map((proj) => (
+                                    {liveProjects.map((proj) => (
                                         <a
                                             key={proj.id}
                                             href={proj.liveUrl}
@@ -268,7 +242,7 @@ export default function About() {
                                         >
                                             <div className="text-sm font-bold text-white">{ref.name}</div>
                                             <div className="text-xs text-violet-300">
-                                                {ref.role} | {ref.organization}
+                                                {ref.role}, {ref.organization}
                                             </div>
                                             <div className="text-xs font-mono text-slate-400 pt-0.5">
                                                 Phone: {ref.phone}
@@ -282,15 +256,15 @@ export default function About() {
                 </div>
             </section>
 
-            {/* DOST-STII INFORMATION SYSTEMS FROM RESUME */}
+            {/* KEY ENGINEERING PROJECTS & INFORMATION SYSTEMS FROM RESUME */}
             <section className="py-14 sm:py-18 scroll-reveal-css">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mb-10">
                         <div className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-2">
-                            // RESUME PROJECTS • INFORMATION SYSTEMS
+                            // KEY ENGINEERING PROJECTS • ENTERPRISE & DOST-STII
                         </div>
                         <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-white">
-                            Information Systems Developed (DOST-STII)
+                            Key Engineering Projects & Information Systems
                         </h2>
                     </div>
 
@@ -316,9 +290,28 @@ export default function About() {
                                     <h3 className="text-lg sm:text-xl font-bold font-display text-white">
                                         {sys.title}
                                     </h3>
+                                    {sys.subtitle && (
+                                        <div className="text-xs font-mono text-violet-300 mt-0.5">
+                                            {sys.subtitle}
+                                        </div>
+                                    )}
                                     <p className="text-xs sm:text-sm text-slate-300 mt-2.5 leading-relaxed">
                                         {sys.description}
                                     </p>
+
+                                    {sys.highlights && sys.highlights.length > 0 && (
+                                        <ul className="mt-3.5 space-y-1.5 border-t border-white/10 pt-3">
+                                            {sys.highlights.map((bullet) => (
+                                                <li
+                                                    key={bullet}
+                                                    className="flex items-start gap-2 text-xs text-slate-200 leading-relaxed"
+                                                >
+                                                    <span className="text-emerald-400 mt-0.5 shrink-0">•</span>
+                                                    <span>{bullet}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
                                 </div>
 
                                 <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap gap-1.5">
@@ -342,15 +335,15 @@ export default function About() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mb-10">
                         <div className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-2">
-                            // SKILLS & TOOLS
+                            // CORE COMPETENCIES & TECHNICAL SKILLS
                         </div>
                         <h2 className="text-3xl sm:text-4xl font-extrabold font-display text-white">
-                            What I Use to Build Websites
+                            Technical Stack & Core Competencies
                         </h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {skillGroups.map((group) => (
+                        {RESUME_SKILL_GROUPS.map((group) => (
                             <SpotlightCard key={group.category} tilt={false} className="p-6 sm:p-7">
                                 <div className="flex items-center justify-between mb-4">
                                     <h3 className="text-lg font-bold font-display text-white">{group.category}</h3>

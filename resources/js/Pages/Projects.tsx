@@ -8,10 +8,11 @@ import { PROJECTS, ProjectItem, RESUME_PROJECTS } from '@/data/portfolioData';
 
 const CATEGORIES = [
     'All Projects',
+    'Enterprise System',
+    'Portal',
     'Online Shop',
     'Web App',
     'Event App',
-    'Portal',
 ] as const;
 
 export default function Projects() {
@@ -57,17 +58,17 @@ export default function Projects() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl">
                         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-violet-500/10 border border-violet-500/30 text-xs font-mono text-violet-300 mb-4">
-                            <span>// MY WEB PROJECTS • LIVE WEBSITES & INFORMATION SYSTEMS</span>
+                            <span>// MY WEB PROJECTS • ENTERPRISE SYSTEMS & LIVE WEBSITES</span>
                         </div>
                         <h1 className="text-4xl sm:text-6xl font-extrabold font-display text-white tracking-tight leading-tight">
                             Websites & systems{' '}
                             <span className="bg-gradient-to-r from-violet-400 via-fuchsia-300 to-indigo-400 bg-clip-text text-transparent">
-                                I’ve built and launched.
+                                I’ve engineered and launched.
                             </span>
                         </h1>
                         <p className="text-slate-300 mt-4 text-base sm:text-lg leading-relaxed">
-                            Explore my live hosted websites on <code className="text-violet-300">*.jkleonardo.tech</code>{' '}
-                            as well as the web-based information systems I developed at DOST-STII.
+                            Explore my key engineering platforms, government information systems at DOST-STII, and live
+                            websites hosted on <code className="text-violet-300">*.jkleonardo.tech</code>.
                         </p>
                     </div>
 
@@ -111,7 +112,7 @@ export default function Projects() {
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
-                                    placeholder="Search projects..."
+                                    placeholder="Search projects or stack..."
                                     className="w-full pl-9 pr-8 py-2 rounded-xl bg-obsidian-950/90 border border-white/15 focus:border-violet-400 focus:ring-1 focus:ring-violet-400 text-xs sm:text-sm text-white placeholder-slate-500"
                                 />
                                 <svg
@@ -168,14 +169,20 @@ export default function Projects() {
                                             <span className="px-3 py-1 rounded-full text-xs font-mono bg-violet-500/15 text-violet-300 border border-violet-500/30">
                                                 {project.category}
                                             </span>
-                                            <a
-                                                href={project.liveUrl}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition"
-                                            >
-                                                {project.domainLabel} ↗
-                                            </a>
+                                            {project.liveUrl ? (
+                                                <a
+                                                    href={project.liveUrl}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition"
+                                                >
+                                                    {project.domainLabel} ↗
+                                                </a>
+                                            ) : (
+                                                <span className="px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                                                    {project.domainLabel}
+                                                </span>
+                                            )}
                                         </div>
 
                                         <div
@@ -219,14 +226,16 @@ export default function Projects() {
                                             </button>
 
                                             <div className="flex items-center gap-2">
-                                                <a
-                                                    href={project.liveUrl}
-                                                    target="_blank"
-                                                    rel="noreferrer"
-                                                    className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-violet-500/20 border border-white/10 hover:border-violet-400/40 text-xs font-mono text-violet-200 hover:text-white transition"
-                                                >
-                                                    Open Live Site ↗
-                                                </a>
+                                                {project.liveUrl && (
+                                                    <a
+                                                        href={project.liveUrl}
+                                                        target="_blank"
+                                                        rel="noreferrer"
+                                                        className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-violet-500/20 border border-white/10 hover:border-violet-400/40 text-xs font-mono text-violet-200 hover:text-white transition"
+                                                    >
+                                                        Open Live Site ↗
+                                                    </a>
+                                                )}
                                                 <Link
                                                     href={`/contact?project=${project.slug}`}
                                                     className="px-3.5 py-2 rounded-xl btn-violet-shimmer text-xs font-semibold text-white"
@@ -241,17 +250,18 @@ export default function Projects() {
                         </div>
                     )}
 
-                    {/* Government & Institutional Systems Section */}
+                    {/* Key Engineering & Institutional Systems Section */}
                     <div className="mt-16">
                         <div className="max-w-3xl mb-8">
                             <div className="text-xs font-mono uppercase tracking-widest text-violet-400 mb-2">
-                                // INSTITUTIONAL PROJECTS • DOST-STII
+                                // CV ENGINEERING & INSTITUTIONAL PROJECTS • DOST-STII & ENTERPRISE
                             </div>
                             <h2 className="text-2xl sm:text-4xl font-extrabold font-display text-white">
-                                Government & Information Systems
+                                Key Engineering & Information Systems
                             </h2>
                             <p className="text-sm sm:text-base text-slate-400 mt-2">
-                                Web-based information systems developed and maintained for DOST-STII.
+                                Full-stack enterprise and government information systems engineered, deployed, and
+                                maintained across operational, financial, and institutional workflows.
                             </p>
                         </div>
 
@@ -277,9 +287,28 @@ export default function Projects() {
                                         <h3 className="text-lg sm:text-xl font-bold font-display text-white">
                                             {sys.title}
                                         </h3>
+                                        {sys.subtitle && (
+                                            <div className="text-xs font-mono text-violet-300 mt-0.5">
+                                                {sys.subtitle}
+                                            </div>
+                                        )}
                                         <p className="text-xs sm:text-sm text-slate-300 mt-2.5 leading-relaxed">
                                             {sys.description}
                                         </p>
+
+                                        {sys.highlights && sys.highlights.length > 0 && (
+                                            <ul className="mt-3.5 space-y-1.5 border-t border-white/10 pt-3">
+                                                {sys.highlights.map((bullet) => (
+                                                    <li
+                                                        key={bullet}
+                                                        className="flex items-start gap-2 text-xs text-slate-200 leading-relaxed"
+                                                    >
+                                                        <span className="text-emerald-400 mt-0.5 shrink-0">•</span>
+                                                        <span>{bullet}</span>
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
                                     </div>
 
                                     <div className="mt-5 pt-4 border-t border-white/10 flex flex-wrap gap-1.5">

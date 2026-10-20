@@ -16,26 +16,15 @@ import {
 
 export default function Welcome() {
     const featuredProjects = PROJECTS;
-    const [activeHeroProject, setActiveHeroProject] = useState<ProjectItem>(featuredProjects[0]);
+    const liveHeroProjects = PROJECTS.filter((p) => Boolean(p.liveUrl));
+    const [activeHeroProject, setActiveHeroProject] = useState<ProjectItem>(
+        liveHeroProjects[0] || featuredProjects[0]
+    );
     const [selectedModalProject, setSelectedModalProject] = useState<ProjectItem | null>(null);
-
-    const techMarqueeItems = [
-        'Joram Kate S. Leonardo',
-        'JKLeonardo Tech',
-        'Laravel & PHP',
-        'React & TypeScript',
-        'Vue.js & Inertia.js',
-        'Tailwind CSS',
-        'velaaromaph.jkleonardo.tech',
-        'workscheduler.jkleonardo.tech',
-        'christmasparty.jkleonardo.tech',
-        'ticketingportal.jkleonardo.tech',
-        'github.com/joramleonardo',
-    ];
 
     return (
         <PortfolioLayout>
-            <Head title="Joram Leonardo — Personal Web Portfolio & Resume" />
+            <Head title="Joram Kate Leonardo — Full Stack Web Developer Portfolio & CV" />
 
             {/* HERO SECTION WITH PROFILE PHOTO */}
             <section className="relative pt-8 pb-20 sm:pt-14 sm:pb-28 overflow-hidden">
@@ -59,15 +48,16 @@ export default function Welcome() {
                             </div>
 
                             <h1 className="text-4xl sm:text-6xl font-extrabold font-display tracking-tight text-white leading-[1.08]">
-                                Hi, I’m Joram — I build websites & web apps under{' '}
+                                Hi, I’m Joram — I engineer web systems & apps under{' '}
                                 <span className="bg-gradient-to-r from-violet-400 via-fuchsia-300 to-indigo-400 bg-clip-text text-transparent">
                                     JKLeonardo Tech.
                                 </span>
                             </h1>
 
                             <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-                                {STUDIO_PROFILE.tagline} Whether you need an online shop, a team scheduler, an event
-                                website, or a personal site—I can build it for you from start to finish.
+                                {STUDIO_PROFILE.tagline} From enterprise analytics, procurement, and ticketing
+                                platforms to custom online stores and interactive team apps—I build reliable,
+                                user-friendly systems from start to finish.
                             </p>
 
                             {/* Primary & Secondary CTAs */}
@@ -123,19 +113,21 @@ export default function Welcome() {
                                             My Live Websites
                                         </span>
                                     </div>
-                                    <a
-                                        href={activeHeroProject.liveUrl}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="text-[11px] font-mono text-emerald-300 hover:text-white bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-0.5 rounded-full transition"
-                                    >
-                                        Open Live Site ↗
-                                    </a>
+                                    {activeHeroProject.liveUrl && (
+                                        <a
+                                            href={activeHeroProject.liveUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="text-[11px] font-mono text-emerald-300 hover:text-white bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-0.5 rounded-full transition"
+                                        >
+                                            Open Live Site ↗
+                                        </a>
+                                    )}
                                 </div>
 
-                                {/* Selector Pills for All 4 Live Projects */}
-                                <div className="grid grid-cols-4 gap-1 p-1 rounded-xl bg-obsidian-950/90 border border-white/10 mb-4">
-                                    {featuredProjects.map((proj) => (
+                                {/* Selector Pills for All Live Projects */}
+                                <div className="grid grid-cols-5 gap-1 p-1 rounded-xl bg-obsidian-950/90 border border-white/10 mb-4">
+                                    {liveHeroProjects.map((proj) => (
                                         <button
                                             key={proj.id}
                                             type="button"
@@ -146,7 +138,7 @@ export default function Welcome() {
                                                     : 'text-slate-400 hover:text-white hover:bg-white/5'
                                             }`}
                                         >
-                                            {proj.title.split(' ')[0]}
+                                            {proj.title.replace(/^IT\s+/i, '').split(' ')[0]}
                                         </button>
                                     ))}
                                 </div>
@@ -165,14 +157,20 @@ export default function Welcome() {
                                         <div className="text-sm font-bold text-white truncate">
                                             {activeHeroProject.title}
                                         </div>
-                                        <a
-                                            href={activeHeroProject.liveUrl}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="text-xs font-mono text-violet-300 hover:underline truncate block"
-                                        >
-                                            {activeHeroProject.domainLabel} ↗
-                                        </a>
+                                        {activeHeroProject.liveUrl ? (
+                                            <a
+                                                href={activeHeroProject.liveUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="text-xs font-mono text-violet-300 hover:underline truncate block"
+                                            >
+                                                {activeHeroProject.domainLabel} ↗
+                                            </a>
+                                        ) : (
+                                            <span className="text-xs font-mono text-violet-300 truncate block">
+                                                {activeHeroProject.domainLabel}
+                                            </span>
+                                        )}
                                     </div>
                                     <button
                                         type="button"
@@ -188,36 +186,20 @@ export default function Welcome() {
                 </div>
             </section>
 
-            {/* INFINITE SKILLS & SUBDOMAIN MARQUEE */}
-            <section className="py-5 border-y border-violet-500/15 bg-obsidian-900/50 overflow-hidden">
-                <div className="flex w-max animate-marquee space-x-8">
-                    {[...techMarqueeItems, ...techMarqueeItems].map((item, idx) => (
-                        <div
-                            key={idx}
-                            className="flex items-center gap-3 text-xs sm:text-sm font-mono text-slate-300 tracking-wide"
-                        >
-                            <span className="text-violet-400">✦</span>
-                            <span>{item}</span>
-                        </div>
-                    ))}
-                </div>
-            </section>
-
             {/* FEATURED WEB PROJECTS SECTION */}
             <section id="featured-projects" className="py-20 sm:py-28 scroll-reveal-css">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
                         <div>
                             <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-violet-400 mb-2">
-                                <span>// 01. My Web Projects</span>
+                                <span>// 01. Key Engineering & Web Projects</span>
                             </div>
                             <h2 className="text-3xl sm:text-5xl font-extrabold font-display text-white tracking-tight">
-                                Websites & Apps I’ve Built
+                                Systems, Websites & Apps I’ve Built
                             </h2>
                             <p className="text-slate-400 mt-2 max-w-2xl text-sm sm:text-base">
-                                Here are my live web projects hosted on{' '}
-                                <code className="text-violet-300">*.jkleonardo.tech</code>. Click any project to read
-                                what it does or visit the live site directly.
+                                Explore my enterprise engineering platforms, institutional systems, and live web
+                                applications hosted on <code className="text-violet-300">*.jkleonardo.tech</code>.
                             </p>
                         </div>
 
@@ -225,7 +207,7 @@ export default function Welcome() {
                             href="/projects"
                             className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-violet-500/15 hover:bg-violet-500/25 border border-violet-400/30 text-sm font-semibold text-violet-200 transition self-start md:self-auto"
                         >
-                            <span>See All Projects</span>
+                            <span>See All Projects ({PROJECTS.length})</span>
                             <span>→</span>
                         </Link>
                     </div>
@@ -239,14 +221,20 @@ export default function Welcome() {
                                         <span className="px-3 py-1 rounded-full text-xs font-mono bg-violet-500/15 text-violet-300 border border-violet-500/30">
                                             {project.category}
                                         </span>
-                                        <a
-                                            href={project.liveUrl}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                            className="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition"
-                                        >
-                                            {project.domainLabel} ↗
-                                        </a>
+                                        {project.liveUrl ? (
+                                            <a
+                                                href={project.liveUrl}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                className="px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 transition"
+                                            >
+                                                {project.domainLabel} ↗
+                                            </a>
+                                        ) : (
+                                            <span className="px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/15 text-cyan-300 border border-cyan-500/30">
+                                                {project.domainLabel}
+                                            </span>
+                                        )}
                                     </div>
 
                                     {/* Interactive Visual Mockup */}
@@ -290,14 +278,24 @@ export default function Welcome() {
                                         </button>
 
                                         <div className="flex items-center gap-2">
-                                            <a
-                                                href={project.liveUrl}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                className="px-3.5 py-2 rounded-xl bg-violet-500/20 hover:bg-violet-500/30 border border-violet-400/30 text-xs font-mono text-white transition"
-                                            >
-                                                Visit Live Site ↗
-                                            </a>
+                                            {project.liveUrl ? (
+                                                <a
+                                                    href={project.liveUrl}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="px-3.5 py-2 rounded-xl bg-violet-500/20 hover:bg-violet-500/30 border border-violet-400/30 text-xs font-mono text-white transition"
+                                                >
+                                                    Visit Live Site ↗
+                                                </a>
+                                            ) : (
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setSelectedModalProject(project)}
+                                                    className="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-violet-500/20 border border-white/10 hover:border-violet-400/30 text-xs font-mono text-violet-200 transition"
+                                                >
+                                                    Case Study ↗
+                                                </button>
+                                            )}
                                         </div>
                                     </div>
                                 </div>
